@@ -8,3 +8,6 @@ __DATA__
 hayajo
 hayajo@cpan.org
 MooX::Types::MooseLike::Email
+EmailAddress
+EmailAddressLoose
+EmailMessage
