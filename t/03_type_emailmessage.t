@@ -5,20 +5,19 @@ use Test::More tests => 3;
 use Test::Exception;
 
 {
-  package MyClass;
-  use Moo;
-  use MooX::Types::MooseLike::Email qw/EmailMessage/;
-  use Scalar::Util qw(blessed);
-  has 'message'        => ( isa => EmailMessage, is => 'ro' );
-  has 'coerce_message' => (
-    isa    => EmailMessage,
-    is     => 'ro',
-    coerce => sub {
-          return ( $_[0] and blessed( $_[0] ) and blessed( $_[0] ) ne 'Regexp' )
-              ? $_[0]
-              : Email::Simple->new( $_[0] );
-      },
-  );
+    package MyClass;
+    use Moo;
+    use MooX::Types::MooseLike::Base qw/:all/;
+    use MooX::Types::MooseLike::Email qw/EmailMessage/;
+    use Scalar::Util qw(blessed);
+    has 'message' => ( isa => EmailMessage, is => 'ro' );
+    has 'coerce_message' => (
+        isa    => EmailMessage,
+        is     => 'ro',
+        coerce => sub {
+            return (is_Str($_[0])) ? Email::Simple->new( $_[0] ) : $_[0];
+        },
+    );
 }
 
 my $text = <<'TEXT';
