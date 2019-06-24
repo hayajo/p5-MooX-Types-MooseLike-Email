@@ -10,6 +10,7 @@ requires 'Email::Valid';
 requires 'Email::Valid::Loose';
 requires 'Email::Abstract';
 
+test_requires 'Moo';
 test_requires 'Test::More';
 test_requires 'Test::Exception';
 test_requires 'Scalar::Util';
